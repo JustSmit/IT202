@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+ 
+<meta charset="utf-8">
+
+<style>   #number, #account, #amount {display:  none;}
+          form {margin: auto; border:1px dashed blue; padding: 20px; width: 300px;}
+
+
+
+</style>
+
+<form action "yj.php">
+
+<select name = "choice" id = "choice">
+
+  <option value=""           > Choose  </option>
+  <option value="List"       > List    </option>
+  <option value="Perform"    > Perform </option>
+  <option value="Clear"      > Clear   </option>
+</select> <br><br>
+
+<div id = "number" ><input type=text name = "number"  > Enter number<br></div>
+<div id = "account"><input type=text name = "account" > Enter account<br></div>
+<div id = "amount" ><input type=text name = "amount"  > Enter amount<br></div>
+<input type= submit>
+</form>
+
+<script>
+var ptrChoice = document.getElementById("choice")
+ptrChoice.addEventListener("change", F)
+var v = ""
+
+var ptrNumber = document.getElementById("number")
+var ptrAccount = document.getElementById("account")
+var ptrAmount = document.getElementById("amount")
+
+
+
+function F() 
+{
+  v = ptrChoice.value
+  ptrNumber.style.display = "none"
+  ptrAccount.style.display = "none"
+  ptrAmount.style.display = "none"
+  //alert("Menu value is: " + v)
+ 
+    if (ptrChoice.value == "List")
+    {
+      ptrNumber.style.display = "block" 
+    }
+    else if (ptrChoice.value == "Perform")
+    {
+      ptrAccount.style.display = "block"
+      ptrAmount.style.display  = "block"
+    }
+    else if (ptrChoice.value == "Clear")
+    {
+      ptrNumber.style.display = "block"
+    }
+}
+</script>
+
+/*
+service.php
+
+seesion sart
+gatekeeper code
+include("myfunctions")
+connect to database
+
+$choice=safe("choice")
+if($choice == "List")
+{
+  $ucid    = $_SESSION["ucid"]
+  $number  = safe("number")
+  retrieve($ucid, $number)
+}
+
+if($choice == "Perform")
+{
+  $ucid    = $_SESSION["ucid"]
+  $account = safe("account")
+  $amount  = safe("amount")
+  transact($ucid, $account, $amount)
+}
+
+if($choice == "Clear")
+{
+  $ucid    = $_SESSION["ucid"]
+  $account = safe("account")
+  $amount  = safe("amount")
+  transact($ucid, $account, $amount)
+}
+
+clear
+usage""
+
+where: define - myfunction.php
+use
+  service2.php
+  $ucid = $_SESSION["ucid"]
+  $choice = safe("choice")
+      if($choice == "Clear")
+        {
+        $account = safe($account)
+        clear ($ucid, $account)
+        }
+what: removes trans for a ucid & account
+updates account row for ucid & account
+
+how:   
+      SQL:delete from trsactions 
+      where ucid = ... and account =...
+      SQL: update 
+          accounts
+          set
+          balance=0.00,
+          recent = NOW()
+      where
+        ucid = ... and account = ...
+service1.php
+  session sart
+  gatekeeper- only for pin passed
+  before: authentication $_SESSION["logged"]
+  If(!isset ($SESSION["logged'])){
+  echo message
+  header ("refresh: 2;... ");
+  exit()
+  }
+  now: pin text was passed $_SESSION["pinpass"]= $pin
+   If(!isset ($SESSION["logged'])){
+  echo message
+  header ("refresh: 2; url=auth.html");
+  exit()
+  }
+  $pin = true;
+
+  menu form + JS
+  BUT
+  radio button version + JS
+  
+  <form>
+  Radio button
+  <input type = radio name="choice" id="List"   value="List">List<br>
+  <input type = radio name="choice" id="Perform"  value="Perform" >Perform<br>
+  <input type = radio name="choice" id="Clear" value= "Clear">Clear<br>
+  
+  ALL THE DICS AND INPUT FIELDS FROM MENU
+  <input type= submit>
+  </form>
+  <script>
+  
+  var ptrList  = document.getElementById("List")
+  var ptrList  = document.getElementById("Perform")
+  var ptrList  = document.getElementById("Clear")
+  
+  ptrList.addEventListener("click",F)
+  ...
+  ...
+  
+  function F{} {
+  // the keyword this 
+  }
+  </script>
+*/
+
